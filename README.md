@@ -9,4 +9,4 @@ Tässä  *harjoitustyön* **README.md**
 [komentorivi.txt](https://github.com/EljasV/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
 ### Viikko2
-????
+?????
