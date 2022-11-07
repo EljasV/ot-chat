@@ -1,0 +1,120 @@
+User@V-2 MINGW64 /d/YliopistoGit/ot_viikko1 (master)
+$ git log --stat | cat
+commit 3a0b43cdc259afd6fefcaee0f6a2d258ea1b2db6
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 18:50:06 2022 +0200
+
+            deleted:    tiedostoja/file2
+            renamed:    tiedostoja/file1 -> tiedostoja/file22
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit df74cfd81d5850f984152299a13d5b90714770c9
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 18:45:02 2022 +0200
+
+            new file:   tiedostoja/file1
+            new file:   tiedostoja/file2
+            new file:   tiedostoja/file3
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 5b9e3b5d74031520183c74eb9b4db9e140a2de90
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 18:31:21 2022 +0200
+
+            modified:   eka.txt
+            modified:   kolmas.txt
+
+ eka.txt    | 25 +------------------------
+ kolmas.txt |  3 ++-
+ 2 files changed, 3 insertions(+), 25 deletions(-)
+
+commit 1b09419aa7fda22c108943703e3418123618f2fc
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 18:28:14 2022 +0200
+
+    renamed:    tiedosto.txt -> eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 34f1d39ba1d07276f68c91df74c637edeefe3f4b
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 18:26:52 2022 +0200
+
+    deleted:    toinen.txt
+
+ toinen.txt | 2 --
+ 1 file changed, 2 deletions(-)
+
+commit cd4b1feca412bb9e4d9709ad80ddc4ae2b105f85
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 18:21:36 2022 +0200
+
+            modified:   tiedosto.txt
+
+ tiedosto.txt | 278 ++++-------------------------------------------------------
+ 1 file changed, 15 insertions(+), 263 deletions(-)
+
+commit f709c0786e368cd72bf2117046c0ce11d34d5116
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 18:17:57 2022 +0200
+
+    add much text
+
+ tiedosto.txt | 343 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 343 insertions(+)
+
+commit 2c9120f4a2dbaaceae2aa2061a8eb2c84a309af7
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 18:07:38 2022 +0200
+
+            new file:   stuff/yeet.txt
+
+ stuff/yeet.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit c45eabfaec04ee4ede35d841fd5ac996c75752be
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 17:24:25 2022 +0200
+
+            modified:   kolmas.txt
+            modified:   toinen.txt
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 9040692996746341a710810328e0e8d9cf982b64
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 17:22:35 2022 +0200
+
+            new file:   kolmas.txt
+
+ kolmas.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit fe550f5924d26effe4d5bcc49aea5d53cf863535
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Mon Nov 7 17:19:52 2022 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit fc6dc08b5abd66d096cabc85a7245fad2e354a97
+Author: Eljas Veijalainen <114503308+EljasV@users.noreply.github.com>
+Date:   Sun Nov 6 14:50:15 2022 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
