@@ -58,4 +58,9 @@ public class MaksukorttiTest {
 		assertFalse("Täytyy palauttaa false, kun kortilta rahan ottaminen ei onnistunut", kortti.otaRahaa(11));
 	}
 
+	@Test
+	public void toStringToimii() {
+		assertEquals("saldo: 0.10", kortti.toString());
+	}
+
 }
