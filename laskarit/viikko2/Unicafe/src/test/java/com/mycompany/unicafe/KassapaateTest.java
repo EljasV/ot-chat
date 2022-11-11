@@ -28,7 +28,7 @@ public class KassapaateTest {
 
 	// edulliset lounaat
 	@Test
-	public void edullinenLounasostoToimiiRiittavallaRahalla() {
+	public void edullinenLounasostoKateisellaToimiiRiittavallaRahalla() {
 		int rahaaEnnen = kassapaate.kassassaRahaa();
 		int myytyjaEnnen = kassapaate.edullisiaLounaitaMyyty();
 
@@ -44,7 +44,7 @@ public class KassapaateTest {
 	}
 
 	@Test
-	public void edullinenLounasostoToimiiTasarahalla() {
+	public void edullinenLounasostoKateisellaToimiiTasarahalla() {
 		int rahaaEnnen = kassapaate.kassassaRahaa();
 		int myytyjaEnnen = kassapaate.edullisiaLounaitaMyyty();
 
@@ -60,7 +60,7 @@ public class KassapaateTest {
 	}
 
 	@Test
-	public void edullinenLounasostoToimiiLiianVahallaRahalla() {
+	public void edullinenLounasostoKateisellaToimiiLiianVahallaRahalla() {
 		int rahaaEnnen = kassapaate.kassassaRahaa();
 		int myytyjaEnnen = kassapaate.edullisiaLounaitaMyyty();
 
@@ -78,7 +78,7 @@ public class KassapaateTest {
 
 	//Maukkaat lounaat
 	@Test
-	public void maukasLounasostoToimiiRiittavallaRahalla() {
+	public void maukasLounasostoKateisellaToimiiRiittavallaRahalla() {
 		int rahaaEnnen = kassapaate.kassassaRahaa();
 		int myytyjaEnnen = kassapaate.maukkaitaLounaitaMyyty();
 
@@ -94,7 +94,7 @@ public class KassapaateTest {
 	}
 
 	@Test
-	public void maukasLounasostoToimiiTasarahalla() {
+	public void maukasLounasostoKateisellaToimiiTasarahalla() {
 		int rahaaEnnen = kassapaate.kassassaRahaa();
 		int myytyjaEnnen = kassapaate.maukkaitaLounaitaMyyty();
 
@@ -110,7 +110,7 @@ public class KassapaateTest {
 	}
 
 	@Test
-	public void maukasLounasostoToimiiLiianVahallaRahalla() {
+	public void maukasLounasostoKateisellaToimiiLiianVahallaRahalla() {
 		int rahaaEnnen = kassapaate.kassassaRahaa();
 		int myytyjaEnnen = kassapaate.maukkaitaLounaitaMyyty();
 
@@ -130,5 +130,157 @@ public class KassapaateTest {
 	//////
 
 	//Edulliset lounaat
+	@Test
+	public void edullinenLounasostoKortillaToimiiRiittavallaRahalla() {
+		Maksukortti kortti = new Maksukortti(1000);
 
+		int rahaaKortillaEnnen = kortti.saldo();
+		int rahaaKassassaEnnen = kassapaate.kassassaRahaa();
+		int myytyjaEnnen = kassapaate.edullisiaLounaitaMyyty();
+
+		boolean palautus = kassapaate.syoEdullisesti(kortti);
+
+		int rahaaKortillaJalkeen = kortti.saldo();
+		int rahaaKassassaJalkeen = kassapaate.kassassaRahaa();
+		int myytyjaJalkeen = kassapaate.edullisiaLounaitaMyyty();
+
+		assertTrue(palautus);
+		assertEquals(240, rahaaKortillaEnnen - rahaaKortillaJalkeen);
+		assertEquals(rahaaKassassaJalkeen, rahaaKassassaEnnen);
+		assertEquals(1, myytyjaJalkeen - myytyjaEnnen);
+
+
+	}
+
+	@Test
+	public void edullinenLounasostoKortillaToimiiTasarahalla() {
+		Maksukortti kortti = new Maksukortti(240);
+
+		int rahaaKassassaEnnen = kassapaate.kassassaRahaa();
+		int myytyjaEnnen = kassapaate.edullisiaLounaitaMyyty();
+
+		boolean palautus = kassapaate.syoEdullisesti(kortti);
+
+		int rahaaKortillaJalkeen = kortti.saldo();
+		int rahaaKassassaJalkeen = kassapaate.kassassaRahaa();
+		int myytyjaJalkeen = kassapaate.edullisiaLounaitaMyyty();
+
+		assertTrue(palautus);
+		assertEquals(0, rahaaKortillaJalkeen);
+		assertEquals(rahaaKassassaJalkeen, rahaaKassassaEnnen);
+		assertEquals(1, myytyjaJalkeen - myytyjaEnnen);
+	}
+
+
+	@Test
+	public void edullinenLounasostoKortillaToimiiLiianVahallaRahalla() {
+		Maksukortti kortti = new Maksukortti(200);
+
+		int rahaaKortillaEnnen = kortti.saldo();
+		int rahaaKassassaEnnen = kassapaate.kassassaRahaa();
+		int myytyjaEnnen = kassapaate.edullisiaLounaitaMyyty();
+
+		boolean palautus = kassapaate.syoEdullisesti(kortti);
+
+
+		int rahaaKortillaJalkeen = kortti.saldo();
+		int rahaaKassassaJalkeen = kassapaate.kassassaRahaa();
+		int myytyjaJalkeen = kassapaate.edullisiaLounaitaMyyty();
+
+		assertFalse(palautus);
+		assertEquals(rahaaKassassaJalkeen, rahaaKassassaEnnen);
+		assertEquals(myytyjaJalkeen, myytyjaEnnen);
+		assertEquals(rahaaKortillaEnnen, rahaaKortillaJalkeen);
+	}
+
+
+	//Maukkaat lounaat
+	@Test
+	public void maukasLounasostoKortillaToimiiRiittavallaRahalla() {
+		Maksukortti kortti = new Maksukortti(1000);
+
+		int rahaaKortillaEnnen = kortti.saldo();
+		int rahaaKassassaEnnen = kassapaate.kassassaRahaa();
+		int myytyjaEnnen = kassapaate.maukkaitaLounaitaMyyty();
+
+		boolean palautus = kassapaate.syoMaukkaasti(kortti);
+
+		int rahaaKortillaJalkeen = kortti.saldo();
+		int rahaaKassassaJalkeen = kassapaate.kassassaRahaa();
+		int myytyjaJalkeen = kassapaate.maukkaitaLounaitaMyyty();
+
+		assertTrue(palautus);
+		assertEquals(400, rahaaKortillaEnnen - rahaaKortillaJalkeen);
+		assertEquals(rahaaKassassaJalkeen, rahaaKassassaEnnen);
+		assertEquals(1, myytyjaJalkeen - myytyjaEnnen);
+	}
+
+	@Test
+	public void maukasLounasostoKortillaToimiiTasarahalla() {
+		Maksukortti kortti = new Maksukortti(400);
+
+		int rahaaKassassaEnnen = kassapaate.kassassaRahaa();
+		int myytyjaEnnen = kassapaate.maukkaitaLounaitaMyyty();
+
+		boolean palautus = kassapaate.syoMaukkaasti(kortti);
+
+		int rahaaKortillaJalkeen = kortti.saldo();
+		int rahaaKassassaJalkeen = kassapaate.kassassaRahaa();
+		int myytyjaJalkeen = kassapaate.maukkaitaLounaitaMyyty();
+
+		assertTrue(palautus);
+		assertEquals(0, rahaaKortillaJalkeen);
+		assertEquals(rahaaKassassaJalkeen, rahaaKassassaEnnen);
+		assertEquals(1, myytyjaJalkeen - myytyjaEnnen);
+	}
+
+	@Test
+	public void maukasLounasostoKortillaToimiiLiianVahallaRahalla() {
+
+		Maksukortti kortti = new Maksukortti(200);
+
+		int rahaaKortillaEnnen = kortti.saldo();
+		int rahaaKassassaEnnen = kassapaate.kassassaRahaa();
+		int myytyjaEnnen = kassapaate.maukkaitaLounaitaMyyty();
+
+		boolean palautus = kassapaate.syoMaukkaasti(kortti);
+
+
+		int rahaaKortillaJalkeen = kortti.saldo();
+		int rahaaKassassaJalkeen = kassapaate.kassassaRahaa();
+		int myytyjaJalkeen = kassapaate.maukkaitaLounaitaMyyty();
+
+		assertFalse(palautus);
+		assertEquals(rahaaKassassaJalkeen, rahaaKassassaEnnen);
+		assertEquals(myytyjaJalkeen, myytyjaEnnen);
+		assertEquals(rahaaKortillaEnnen, rahaaKortillaJalkeen);
+	}
+
+	@Test
+	public void lataaRahaaKortille() {
+		Maksukortti kortti = new Maksukortti(0);
+
+		int rahaaKassassaEnnen = kassapaate.kassassaRahaa();
+
+		kassapaate.lataaRahaaKortille(kortti, 5000);
+
+		int rahaaKassassaJalkeen = kassapaate.kassassaRahaa();
+
+		assertEquals(5000, kortti.saldo());
+		assertEquals(5000, rahaaKassassaJalkeen - rahaaKassassaEnnen);
+	}
+
+	@Test
+	public void lataaRahaaKortilleNegatiivinen() {
+		Maksukortti kortti = new Maksukortti(0);
+
+		int rahaaKassassaEnnen = kassapaate.kassassaRahaa();
+
+		kassapaate.lataaRahaaKortille(kortti, -1);
+
+		int rahaaKassassaJalkeen = kassapaate.kassassaRahaa();
+
+		assertEquals(0, kortti.saldo());
+		assertEquals(rahaaKassassaJalkeen, rahaaKassassaEnnen);
+	}
 }
