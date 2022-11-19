@@ -1,16 +1,11 @@
 
 # OT Harjoitustyö
-Tässä  *harjoitustyön* **README.md**
-
-## Tehtävät
-### Viikko 1
-[gitlog.txt](./laskarit/viikko1/gitlog.txt)
-
-[komentorivi.txt](./laskarit/viikko1/komentorivi.txt)
-
-### Viikko2
-[Määrittelydokumentti](./dokumentaatio/vaatimusmaarittely.md)
+Oletko halunnut aina chattailla samalla koneella olevien kanssa? Tässä on uusi mahdollisuutesi!
 
 
-## Työaikakirjanpito
+## Dokumentaatio
+[Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
+
 [Työaikakirjanpito](./dokumentaatio/tuntikirjanpito.md)
+
+[Changelog](./dokumentaatio/changelog.md)
