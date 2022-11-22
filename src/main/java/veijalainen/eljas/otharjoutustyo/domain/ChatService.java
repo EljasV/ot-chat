@@ -1,6 +1,7 @@
 package veijalainen.eljas.otharjoutustyo.domain;
 
 import veijalainen.eljas.otharjoutustyo.dao.UserDao;
+import veijalainen.eljas.otharjoutustyo.dao.UserMemoryDao;
 import veijalainen.eljas.otharjoutustyo.util.Result;
 
 import java.util.Objects;
@@ -8,6 +9,10 @@ import java.util.Objects;
 public class ChatService {
 
 	UserDao userDao;
+
+	public ChatService(UserDao userDao) {
+		this.userDao = userDao;
+	}
 
 	public enum createUserErrorCode {USERNAME_EXISTS, DIFFERENT_PASSWORDS, ILLEGAL_PASSWORD}
 
@@ -21,6 +26,7 @@ public class ChatService {
 		if (password.length() < 5) {
 			return Result.unsuccessful(createUserErrorCode.ILLEGAL_PASSWORD);
 		}
+		userDao.create(new User(username, password));
 		return Result.successful(null);
 	}
 
