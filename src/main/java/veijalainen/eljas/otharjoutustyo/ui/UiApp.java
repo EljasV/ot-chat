@@ -103,7 +103,7 @@ public class UiApp extends Application {
 		};
 
 		continueButton.setOnAction(actionEvent -> {
-			Result<Void, ChatService.createUserErrorCode> result = chatService.createUser(usernameField.getText(), password1Field.getText(), password2Field.getText());
+			Result<Void, ChatService.CreateUserErrorCode> result = chatService.createUser(usernameField.getText(), password1Field.getText(), password2Field.getText());
 
 			if (result.success()) {
 				resetInfo.run();

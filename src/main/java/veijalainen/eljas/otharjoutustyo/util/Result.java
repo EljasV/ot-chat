@@ -1,30 +1,30 @@
 package veijalainen.eljas.otharjoutustyo.util;
 
-public class Result<T, ET> {
+public class Result<T, E> {
 	boolean success;
 	T t;
-	ET et;
+	E e;
 
 	public T get() {
 		return t;
 	}
 
-	public ET getError() {
-		return et;
+	public E getError() {
+		return e;
 	}
 
-	public static <T, ET> Result<T, ET> successful(T t) {
-		Result<T, ET> result = new Result<>();
+	public static <T, E> Result<T, E> successful(T t) {
+		Result<T, E> result = new Result<>();
 		result.t = t;
-		result.et = null;
+		result.e = null;
 		result.success = true;
 		return result;
 	}
 
-	public static <T, ET> Result<T, ET> unsuccessful(ET et) {
-		Result<T, ET> result = new Result<>();
+	public static <T, E> Result<T, E> unsuccessful(E e) {
+		Result<T, E> result = new Result<>();
 		result.t = null;
-		result.et = et;
+		result.e = e;
 		result.success = false;
 		return result;
 	}

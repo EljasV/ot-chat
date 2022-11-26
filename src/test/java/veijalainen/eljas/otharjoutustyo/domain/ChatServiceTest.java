@@ -1,9 +1,7 @@
 package veijalainen.eljas.otharjoutustyo.domain;
 
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
-import veijalainen.eljas.otharjoutustyo.dao.UserDao;
 import veijalainen.eljas.otharjoutustyo.dao.UserMemoryDao;
 import veijalainen.eljas.otharjoutustyo.util.Result;
 
@@ -21,8 +19,8 @@ public class ChatServiceTest {
 	@Test
 	public void createUserWithSameUsername() {
 		chatService.createUser("Aatami", "cba321", "cba321");
-		Result<Void, ChatService.createUserErrorCode> result = chatService.createUser("Aatami", "aaaaa", "aaaaa");
+		Result<Void, ChatService.CreateUserErrorCode> result = chatService.createUser("Aatami", "aaaaa", "aaaaa");
 		assertFalse(result.success());
-		assertEquals(ChatService.createUserErrorCode.USERNAME_EXISTS, result.getError());
+		assertEquals(ChatService.CreateUserErrorCode.USERNAME_EXISTS, result.getError());
 	}
 }
