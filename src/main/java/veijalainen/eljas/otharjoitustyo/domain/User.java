@@ -1,4 +1,4 @@
-package veijalainen.eljas.otharjoutustyo.domain;
+package veijalainen.eljas.otharjoitustyo.domain;
 
 public class User {
 	String username;

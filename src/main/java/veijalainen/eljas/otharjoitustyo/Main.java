@@ -1,7 +1,7 @@
-package veijalainen.eljas.otharjoutustyo;
+package veijalainen.eljas.otharjoitustyo;
 
 import javafx.application.Application;
-import veijalainen.eljas.otharjoutustyo.ui.UiApp;
+import veijalainen.eljas.otharjoitustyo.ui.UiApp;
 
 public class Main {
 	public static void main(String[] args) {

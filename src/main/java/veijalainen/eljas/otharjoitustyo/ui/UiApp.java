@@ -1,4 +1,4 @@
-package veijalainen.eljas.otharjoutustyo.ui;
+package veijalainen.eljas.otharjoitustyo.ui;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -11,10 +11,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import veijalainen.eljas.otharjoutustyo.dao.UserMemoryDao;
-import veijalainen.eljas.otharjoutustyo.domain.ChatService;
-import veijalainen.eljas.otharjoutustyo.domain.User;
-import veijalainen.eljas.otharjoutustyo.util.Result;
+import veijalainen.eljas.otharjoitustyo.dao.UserMemoryDao;
+import veijalainen.eljas.otharjoitustyo.domain.ChatService;
+import veijalainen.eljas.otharjoitustyo.domain.User;
+import veijalainen.eljas.otharjoitustyo.util.Result;
 
 public class UiApp extends Application {
 	Scene loginScene;

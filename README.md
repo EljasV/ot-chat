@@ -6,7 +6,7 @@ Oletko halunnut aina chattailla samalla koneella olevien kanssa? Tässä on uusi
 ## Ohjelman suorittaminen
 Ohjelma voidaan kääntää ja suorittaa seuraavalla komennolla:
 
-```mvn compile exec:java -Dexec.mainClass=veijalainen.eljas.otharjoutustyo.Main```
+```mvn compile exec:java -Dexec.mainClass=veijalainen.eljas.otharjoitustyo.Main```
 
 ## Ohjelman testaaminen
 Ohjelma voidaan testata ja samalla luodaan testikattavuusraportti seuraavalla komennolla:

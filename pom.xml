@@ -39,6 +39,11 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.3</version>
+                <configuration>
+                    <excludes>
+                        <exclude>veijalainen/eljas/otharjoitustyo/ui/*</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>

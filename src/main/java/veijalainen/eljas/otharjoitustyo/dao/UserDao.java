@@ -1,7 +1,7 @@
-package veijalainen.eljas.otharjoutustyo.dao;
+package veijalainen.eljas.otharjoitustyo.dao;
 
-import veijalainen.eljas.otharjoutustyo.domain.User;
-import veijalainen.eljas.otharjoutustyo.util.Result;
+import veijalainen.eljas.otharjoitustyo.domain.User;
+import veijalainen.eljas.otharjoitustyo.util.Result;
 
 import java.util.List;
 

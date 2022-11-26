@@ -1,4 +1,4 @@
-package veijalainen.eljas.otharjoutustyo.util;
+package veijalainen.eljas.otharjoitustyo.util;
 
 public class Result<T, E> {
 	boolean success;
