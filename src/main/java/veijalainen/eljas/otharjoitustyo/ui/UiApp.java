@@ -4,34 +4,47 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import veijalainen.eljas.otharjoitustyo.dao.UserMemoryDao;
+import veijalainen.eljas.otharjoitustyo.dao.UserFileDao;
 import veijalainen.eljas.otharjoitustyo.domain.ChatService;
+import veijalainen.eljas.otharjoitustyo.domain.Session;
 import veijalainen.eljas.otharjoitustyo.domain.User;
 import veijalainen.eljas.otharjoitustyo.util.Result;
 
+import java.util.List;
+import java.util.Objects;
+
 public class UiApp extends Application {
+	public static final Border DEFAULT_BORDER = new Border(
+			  new BorderStroke(Paint.valueOf("black"), BorderStrokeStyle.SOLID,
+						 new CornerRadii(1),
+						 BorderWidths.DEFAULT));
 	Scene loginScene;
 	Scene welcomeScene;
 	Scene createAccountScene;
 	Scene contactsScene;
 
 	ChatService chatService;
+	private Session session;
 
-
-	@Override
-	public void init() throws Exception {
-		chatService = new ChatService(new UserMemoryDao());
-	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
+
+		UserFileDao userDao = new UserFileDao("users.txt");
+		if (!userDao.isWorking()) {
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Couldn't use users.txt file!");
+			alert.show();
+			return;
+		}
+		chatService = new ChatService(userDao);
+
 
 		welcomeScene = createWelcomeScene(stage);
 		loginScene = createLoginScene(stage);
@@ -44,12 +57,45 @@ public class UiApp extends Application {
 	}
 
 	private Scene createContactsScene(Stage stage) {
-		AnchorPane anchorPane = new AnchorPane();
-		VBox centeredVBox = createCenteredVBox(anchorPane);
+		BorderPane borderPane = new BorderPane();
 
-		centeredVBox.getChildren().addAll(new Label("a"), new Label("b"), new Label("c"));
+		AnchorPane topAnchorPane = new AnchorPane();
+		topAnchorPane.setBorder(DEFAULT_BORDER);
+		topAnchorPane.setMinWidth(50);
 
-		return new Scene(anchorPane);
+		Label topLabel = new Label("Chat");
+		topAnchorPane.getChildren().add(topLabel);
+
+		borderPane.setTop(topAnchorPane);
+
+
+		VBox vBox = new VBox();
+		borderPane.setCenter(vBox);
+
+
+		List<User> userList = chatService.getUsers();
+
+		for (User user :
+				  userList) {
+
+			if (session != null && Objects.equals(user, session.getUser())) {
+				continue;
+			}
+
+			AnchorPane anchorPane = new AnchorPane();
+			anchorPane.setMaxHeight(30);
+			anchorPane.setBorder(DEFAULT_BORDER);
+
+			Label userLabel = new Label(user.getUsername());
+			userLabel.setAlignment(Pos.CENTER_LEFT);
+
+
+			anchorPane.getChildren().add(userLabel);
+			vBox.getChildren().add(anchorPane);
+		}
+
+
+		return new Scene(borderPane, 360, 640);
 	}
 
 	private Scene createCreateAccountScene(Stage stage) {
@@ -198,10 +244,12 @@ public class UiApp extends Application {
 
 
 		continueButton.setOnAction(actionEvent -> {
-			Result<User, Void> result = chatService.login(usernameField.getText(), passwordField.getText());
+			Result<Session, Void> result = chatService.login(usernameField.getText(), passwordField.getText());
 
 			if (result.success()) {
 				resetInfo.run();
+				session = result.get();
+				contactsScene = createContactsScene(stage);
 				stage.setScene(contactsScene);
 			}
 		});

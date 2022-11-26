@@ -6,6 +6,8 @@ import veijalainen.eljas.otharjoitustyo.util.Result;
 import java.util.List;
 
 public interface UserDao {
+	boolean isWorking();
+
 	User create(User user);
 
 

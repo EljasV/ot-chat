@@ -3,14 +3,20 @@ package veijalainen.eljas.otharjoitustyo.domain;
 import veijalainen.eljas.otharjoitustyo.dao.UserDao;
 import veijalainen.eljas.otharjoitustyo.util.Result;
 
+import java.util.List;
 import java.util.Objects;
 
 public class ChatService {
 
 	UserDao userDao;
 
+
 	public ChatService(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	public List<User> getUsers() {
+		return userDao.getAll();
 	}
 
 	public enum CreateUserErrorCode { USERNAME_EXISTS, DIFFERENT_PASSWORDS, ILLEGAL_PASSWORD }
@@ -29,7 +35,7 @@ public class ChatService {
 		return Result.successful(null);
 	}
 
-	public Result<User, Void> login(String username, String password) {
+	public Result<Session, Void> login(String username, String password) {
 		Result<User, Void> userResult = userDao.findByUsername(username);
 		if (!userResult.success()) {
 			return Result.unsuccessful(null);
@@ -39,6 +45,6 @@ public class ChatService {
 		if (!Objects.equals(user.password, password)) {
 			return Result.unsuccessful(null);
 		}
-		return Result.successful(user);
+		return Result.successful(new Session(user));
 	}
 }

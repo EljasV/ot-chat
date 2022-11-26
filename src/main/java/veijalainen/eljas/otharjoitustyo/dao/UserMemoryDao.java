@@ -9,6 +9,11 @@ public class UserMemoryDao implements UserDao {
 	List<User> users = new ArrayList<>();
 
 	@Override
+	public boolean isWorking() {
+		return true;
+	}
+
+	@Override
 	public User create(User user) {
 		users.add(user);
 		return user;
