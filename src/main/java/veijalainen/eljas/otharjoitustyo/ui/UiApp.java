@@ -4,10 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -29,9 +26,12 @@ public class UiApp extends Application {
 	Scene welcomeScene;
 	Scene createAccountScene;
 	Scene contactsScene;
+	Scene chatScene;
 
 	ChatService chatService;
 	private Session session;
+
+	private User chattingTo;
 
 
 	@Override
@@ -51,9 +51,20 @@ public class UiApp extends Application {
 		createAccountScene = createCreateAccountScene(stage);
 		contactsScene = createContactsScene(stage);
 
+		chatScene = createChatScene(stage);
 
 		stage.setScene(welcomeScene);
 		stage.show();
+	}
+
+	private Scene createChatScene(Stage stage) {
+		BorderPane borderPane = new BorderPane();
+		if (chattingTo != null) {
+
+			borderPane.setTop(new Label(chattingTo.getUsername()));
+		}
+
+		return new Scene(borderPane);
 	}
 
 	private Scene createContactsScene(Stage stage) {
@@ -63,14 +74,40 @@ public class UiApp extends Application {
 		topAnchorPane.setBorder(DEFAULT_BORDER);
 		topAnchorPane.setMinWidth(50);
 
+
+		AnchorPane innerTopPane = new AnchorPane();
+		AnchorPane.setTopAnchor(innerTopPane, 10.0);
+		AnchorPane.setBottomAnchor(innerTopPane, 10.0);
+		AnchorPane.setLeftAnchor(innerTopPane, 10.0);
+		AnchorPane.setRightAnchor(innerTopPane, 10.0);
+
 		Label topLabel = new Label("Chat");
-		topAnchorPane.getChildren().add(topLabel);
+		topLabel.setAlignment(Pos.CENTER_LEFT);
+		innerTopPane.getChildren().add(topLabel);
+
+
+		Button logoutButton = new Button("Logout");
+		innerTopPane.getChildren().add(logoutButton);
+
+		AnchorPane.setRightAnchor(logoutButton, 0.0);
+
+		logoutButton.setAlignment(Pos.CENTER_RIGHT);
+
+		logoutButton.setOnAction(actionEvent -> {
+			session = null;
+			stage.setScene(loginScene);
+		});
+
+		topAnchorPane.getChildren().add(innerTopPane);
 
 		borderPane.setTop(topAnchorPane);
 
 
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setFitToWidth(true);
+		borderPane.setCenter(scrollPane);
 		VBox vBox = new VBox();
-		borderPane.setCenter(vBox);
+		scrollPane.setContent(vBox);
 
 
 		List<User> userList = chatService.getUsers();
@@ -87,8 +124,14 @@ public class UiApp extends Application {
 			anchorPane.setBorder(DEFAULT_BORDER);
 
 			Label userLabel = new Label(user.getUsername());
+			userLabel.setPadding(new Insets(10));
 			userLabel.setAlignment(Pos.CENTER_LEFT);
 
+			anchorPane.setOnMouseClicked(mouseEvent -> {
+				chattingTo = user;
+				chatScene = createChatScene(stage);
+				stage.setScene(chatScene);
+			});
 
 			anchorPane.getChildren().add(userLabel);
 			vBox.getChildren().add(anchorPane);
