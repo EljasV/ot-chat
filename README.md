@@ -19,3 +19,5 @@ Ohjelma voidaan testata ja samalla luodaan testikattavuusraportti seuraavalla ko
 [Työaikakirjanpito](./dokumentaatio/tuntikirjanpito.md)
 
 [Changelog](./dokumentaatio/changelog.md)
+
+[Arkkitehtuuri](./dokumentaatio/arkkitehtuuri.md)

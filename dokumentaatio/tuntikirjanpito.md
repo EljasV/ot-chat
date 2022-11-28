@@ -7,3 +7,4 @@
 | 21.11. | 2    | Ohjelman luokkia ja UI:ta                                                                   |
 | 22.11. | 2    | Käyttäjien luonti ja kirjautuminen ja repositoryn siistintää                                |
 | 26.11. | 3    | Yhteystietonäkymä tekemistä, käyttäjien tallentaminen levylle sekä lisäksi muuta sekalaista |
+| 28.11. | 2    | Yhteystietonäkymä toimivaksi ja ohjelman rakennekaavio                                      |
