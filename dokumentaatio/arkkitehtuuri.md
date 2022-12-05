@@ -1,7 +1,6 @@
 
 # Arkkitehtuuri
 
-Message eli viesti ei ole vielä tehty, ajattelin että se tulee näyttämään joltain tältä
 ````mermaid
 flowchart
     subgraph ui

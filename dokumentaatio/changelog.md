@@ -1,4 +1,9 @@
 
+## Viikko 5
+- Tee chattinäkymä
+- Chatti toimimaan
+- MessageFileDao tallentaa viestit levylle
+- Message uusi luokka
 
 ## Viikko 4
 - Tee yhteystietonäkymä

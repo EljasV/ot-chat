@@ -1,5 +1,6 @@
 package veijalainen.eljas.otharjoitustyo.domain;
 
+import veijalainen.eljas.otharjoitustyo.dao.MessageDao;
 import veijalainen.eljas.otharjoitustyo.dao.UserDao;
 import veijalainen.eljas.otharjoitustyo.util.Result;
 
@@ -9,10 +10,12 @@ import java.util.Objects;
 public class ChatService {
 
 	UserDao userDao;
+	MessageDao messageDao;
 
 
-	public ChatService(UserDao userDao) {
+	public ChatService(UserDao userDao, MessageDao messageDao) {
 		this.userDao = userDao;
+		this.messageDao = messageDao;
 	}
 
 	public List<User> getUsers() {
@@ -46,5 +49,13 @@ public class ChatService {
 			return Result.unsuccessful(null);
 		}
 		return Result.successful(new Session(user));
+	}
+
+	public List<Message> getMessageHistory(String userA, String userB) {
+		return messageDao.getMessageHistory(userA, userB);
+	}
+
+	public void sendMessage(Message message) {
+		messageDao.sendMessage(message);
 	}
 }

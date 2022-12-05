@@ -8,12 +8,15 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import veijalainen.eljas.otharjoitustyo.dao.MessageFileDao;
 import veijalainen.eljas.otharjoitustyo.dao.UserFileDao;
 import veijalainen.eljas.otharjoitustyo.domain.ChatService;
+import veijalainen.eljas.otharjoitustyo.domain.Message;
 import veijalainen.eljas.otharjoitustyo.domain.Session;
 import veijalainen.eljas.otharjoitustyo.domain.User;
 import veijalainen.eljas.otharjoitustyo.util.Result;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,12 +41,20 @@ public class UiApp extends Application {
 	public void start(Stage stage) throws Exception {
 
 		UserFileDao userDao = new UserFileDao("users.txt");
+		MessageFileDao messageFileDao = new MessageFileDao("messages.txt");
 		if (!userDao.isWorking()) {
 			Alert alert = new Alert(Alert.AlertType.ERROR, "Couldn't use users.txt file!");
 			alert.show();
 			return;
 		}
-		chatService = new ChatService(userDao);
+		if (!messageFileDao.isWorking()) {
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Couldn't use messages.txt file!");
+			alert.show();
+			return;
+		}
+
+
+		chatService = new ChatService(userDao, messageFileDao);
 
 
 		welcomeScene = createWelcomeScene(stage);
@@ -59,12 +70,104 @@ public class UiApp extends Application {
 
 	private Scene createChatScene(Stage stage) {
 		BorderPane borderPane = new BorderPane();
-		if (chattingTo != null) {
 
-			borderPane.setTop(new Label(chattingTo.getUsername()));
+		if (chattingTo == null) {
+			return new Scene(borderPane);
 		}
 
-		return new Scene(borderPane);
+		AnchorPane topAnchorPane = new AnchorPane();
+		topAnchorPane.setBorder(DEFAULT_BORDER);
+		topAnchorPane.setMinWidth(50);
+
+
+		AnchorPane innerTopPane = new AnchorPane();
+		AnchorPane.setTopAnchor(innerTopPane, 10.0);
+		AnchorPane.setBottomAnchor(innerTopPane, 10.0);
+		AnchorPane.setLeftAnchor(innerTopPane, 10.0);
+		AnchorPane.setRightAnchor(innerTopPane, 10.0);
+
+		Button backButton = new Button("Back");
+		backButton.setAlignment(Pos.CENTER_LEFT);
+		innerTopPane.getChildren().add(backButton);
+
+		backButton.setOnAction(actionEvent -> {
+			chattingTo = null;
+			stage.setScene(contactsScene);
+		});
+
+
+		Label contactNameLabel = new Label(chattingTo.getUsername());
+		contactNameLabel.setAlignment(Pos.CENTER);
+		AnchorPane.setLeftAnchor(contactNameLabel, 0.0);
+		AnchorPane.setRightAnchor(contactNameLabel, 0.0);
+		innerTopPane.getChildren().add(contactNameLabel);
+
+
+		Button logoutButton = new Button("Logout");
+		innerTopPane.getChildren().add(logoutButton);
+		AnchorPane.setRightAnchor(logoutButton, 0.0);
+		logoutButton.setAlignment(Pos.CENTER_RIGHT);
+
+		logoutButton.setOnAction(actionEvent -> {
+			session = null;
+			stage.setScene(loginScene);
+		});
+
+		topAnchorPane.getChildren().add(innerTopPane);
+		borderPane.setTop(topAnchorPane);
+
+
+		VBox vBox = new VBox();
+		List<Message> messages = chatService.getMessageHistory(session.getUser().getUsername(), chattingTo.getUsername());
+
+		for (Message message : messages) {
+			String data = message.data;
+
+			AnchorPane anchorPane = new AnchorPane();
+
+			Label label = new Label(data);
+
+			if (message.fromName.equals(session.getUser().getUsername())) {
+				AnchorPane.setRightAnchor(label, 10.0);
+			} else {
+				AnchorPane.setLeftAnchor(label, 10.0);
+			}
+			anchorPane.getChildren().add(label);
+
+			label.setBorder(DEFAULT_BORDER);
+
+			vBox.getChildren().add(anchorPane);
+		}
+
+		ScrollPane scrollPane = new ScrollPane(vBox);
+		scrollPane.setFitToWidth(true);
+
+		borderPane.setCenter(scrollPane);
+
+
+		AnchorPane inputPane = new AnchorPane();
+		inputPane.setBorder(DEFAULT_BORDER);
+		TextField inputField = new TextField();
+		inputPane.getChildren().add(inputField);
+
+
+		Button sendButton = new Button("Send");
+		sendButton.setOnAction(actionEvent -> {
+			Message message = new Message(session.getUser().getUsername(), chattingTo.getUsername(), inputField.getText(), Instant.now().getEpochSecond());
+			chatService.sendMessage(message);
+			chatScene = createChatScene(stage);
+			stage.setScene(chatScene);
+
+		});
+		AnchorPane.setRightAnchor(sendButton, 0.0);
+		AnchorPane.setLeftAnchor(inputField, 0.0);
+		AnchorPane.setRightAnchor(inputField, 50.0);
+		inputPane.getChildren().add(sendButton);
+
+
+		borderPane.setBottom(inputPane);
+
+		return new Scene(borderPane, 360, 640);
 	}
 
 	private Scene createContactsScene(Stage stage) {

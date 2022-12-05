@@ -2,6 +2,7 @@ package veijalainen.eljas.otharjoitustyo.domain;
 
 import org.junit.Before;
 import org.junit.Test;
+import veijalainen.eljas.otharjoitustyo.dao.MessageMemoryDao;
 import veijalainen.eljas.otharjoitustyo.dao.UserMemoryDao;
 import veijalainen.eljas.otharjoitustyo.util.Result;
 
@@ -12,7 +13,7 @@ public class ChatServiceTest {
 
 	@Before
 	public void setup() {
-		chatService = new ChatService(new UserMemoryDao());
+		chatService = new ChatService(new UserMemoryDao(), new MessageMemoryDao());
 	}
 
 
