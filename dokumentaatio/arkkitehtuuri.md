@@ -1,7 +1,7 @@
 
 # Arkkitehtuuri
 
-
+Sekvenssikaavio, joka näyttää mitä tapahtuu, kun käyttäjä laittaa viestin toiselle käyttäjälle
 ````mermaid
 sequenceDiagram
     Käyttäjä ->> UI: painaa 'send'- painiketta
@@ -21,6 +21,7 @@ sequenceDiagram
 
 
 ## Rakenne
+Koko sovelluksen rakenne näyttää tältä
 ````mermaid
 flowchart
     subgraph ui
