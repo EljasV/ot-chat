@@ -1,6 +1,26 @@
 
 # Arkkitehtuuri
 
+
+````mermaid
+sequenceDiagram
+    Käyttäjä ->> UI: painaa 'send'- painiketta
+    UI ->> ChatService: sendMessage(message)
+    ChatService ->> MessageDao: sendMessage(message)
+    MessageDao -->> MessageFileDao: 
+    MessageFileDao ->> MessageFileDao: save()
+    MessageFileDao ->> File: Data
+    File ->> MessageFileDao: 
+    MessageFileDao -->> MessageDao: 
+    MessageDao ->> ChatService: 
+    ChatService ->> UI: 
+    UI ->> UI: Uudelleenlataus
+    UI ->> Käyttäjä: 
+    
+````
+
+
+## Rakenne
 ````mermaid
 flowchart
     subgraph ui
