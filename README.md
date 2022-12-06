@@ -34,6 +34,14 @@ Checkstyle -raportti luodaan tiedostoon [./target/site/checkstyle.html](./target
 
 Tiedosto ilmestyy kansioon [./target](./target)
 
+Tiedosto voidaan suorittaa komennolla:
+
+```java -jar ot-harjoitustyo-1.0.0.jar```
+
+Jos olet projektin juurikansiossa, suoritus tehdään komennolla
+
+``java -jar target\ot-harjoitustyo-1.0.0.jar``
+
 ## Dokumentaatio
 [Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
 
