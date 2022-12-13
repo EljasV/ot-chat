@@ -45,7 +45,7 @@ public class ConfigFileDaoTest {
 	public void constructorCalledMissingFile() {
 		File file1 = new File(temporaryFolder.getRoot().getPath() + "/test1");
 
-		ConfigFileDao messageFileDao = new ConfigFileDao(file1.getName());
+		ConfigFileDao messageFileDao = new ConfigFileDao(file1.getAbsolutePath());
 
 
 		assertTrue(messageFileDao.isWorking());
@@ -56,14 +56,14 @@ public class ConfigFileDaoTest {
 
 	@Test
 	public void loginCorrectly() {
-		ConfigFileDao configFileDao = new ConfigFileDao(file.getName());
+		ConfigFileDao configFileDao = new ConfigFileDao(file.getAbsolutePath());
 		Result<Moderator, Void> result = configFileDao.login("testModerator", "aaaaa");
 		assertTrue(result.success());
 	}
 
 	@Test
 	public void loginInvalid() {
-		ConfigFileDao configFileDao = new ConfigFileDao(file.getName());
+		ConfigFileDao configFileDao = new ConfigFileDao(file.getAbsolutePath());
 		Result<Moderator, Void> result = configFileDao.login("nobody", "1234");
 		assertFalse(result.success());
 	}

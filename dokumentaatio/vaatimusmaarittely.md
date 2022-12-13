@@ -11,7 +11,7 @@ Moderaattori pystyy näkemään toisten käyttäjien viestit ja poistamaan epäa
 ## Toiminnallisuudet
 * [x] Käyttäjien luominen ja kirjautuminen järjestelmään
 * [x] Viestien jättäminen ja lukeminen
-* [ ] Moderaattoreiden mahdollisuus lukea ja poistaa viestejä
+* [x] Moderaattoreiden mahdollisuus lukea ja poistaa viestejä
 ## Toimintaympäristön rajoitteet
 * Ohjelmiston tulee toimia Linux-käyttöjärjestelmällä
 * Viestit tallennetaan paikalliselle koneelle
