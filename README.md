@@ -44,7 +44,14 @@ Tiedosto voidaan suorittaa komennolla:
 
 Jos olet projektin juurikansiossa, suoritus tehdään komennolla
 
-``java -jar target\ot-harjoitustyo-1.0.0.jar``
+(Windows)``java -jar target\ot-harjoitustyo-1.0.0.jar``
+
+(Linux)``java -jar target/ot-harjoitustyo-1.0.0.jar``
+
+
+## Javadoc
+Projektin javadoc voidaan generoida komennolla
+```mvn javadoc:javadoc```
 
 ## Dokumentaatio
 [Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
