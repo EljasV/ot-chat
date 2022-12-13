@@ -32,10 +32,12 @@ flowchart
         Session
         User
         Message
+        Moderator
     end
     subgraph dao
         UserDao
         MessageDao
+        ConfigDao
     end
     UiApp --> ChatService
     UiApp --> Session
@@ -46,4 +48,7 @@ flowchart
     UiApp -.-> Message
     Message -.- MessageDao
     ChatService -->Message
+    ChatService -.- Moderator
+    UiApp -.- Moderator
+    Moderator -.- ConfigDao
 ````
