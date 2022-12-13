@@ -1,11 +1,12 @@
 
 # OT Harjoitustyö
 Oletko halunnut aina chattailla samalla koneella olevien kanssa? Tässä on uusi mahdollisuutesi!
-
+Älä kuitenkaan hauku muita, sillä chattia voidaan moderoida.
 
 ## Julkaisut
 [1. julkaisu viikolla 5](https://github.com/EljasV/ot-harjoitustyo/releases/tag/viikko5)
 
+[2. julkaisu viikolla 6](https://github.com/EljasV/ot-harjoitustyo/releases/tag/viikko6)
 
 ## Ohjelman suorittaminen
 Ohjelma voidaan kääntää ja suorittaa seuraavalla komennolla:
