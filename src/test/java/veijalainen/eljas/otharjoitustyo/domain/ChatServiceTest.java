@@ -46,4 +46,37 @@ public class ChatServiceTest {
 		assertTrue(result.success());
 	}
 
+	@Test
+	public void loginSuccessfully() {
+		String name = "Emma";
+		String password = "mahtava_salasana";
+		chatService.createUser(name, password, password);
+
+		Result<Session, Void> result = chatService.login(name, password);
+
+		assertTrue(result.success());
+		assertEquals(new User(name, password), result.get().getUser());
+	}
+
+	@Test
+	public void loginInvalidName() {
+		String name = "Fanni";
+		String password = "aaaaa";
+		chatService.createUser(name, password, password);
+
+		Result<Session, Void> result = chatService.login("Anni", password);
+
+		assertFalse(result.success());
+	}
+
+	@Test
+	public void loginInvalidPassword() {
+		String name = "Gabriel";
+		String password = ";;;;;;";
+		chatService.createUser(name, password, password);
+
+		Result<Session, Void> result = chatService.login(name, "123");
+		assertFalse(result.success());
+	}
+
 }

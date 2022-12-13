@@ -4,6 +4,10 @@ import veijalainen.eljas.otharjoitustyo.domain.Message;
 
 import java.util.List;
 
+
+/**
+ * A DAO interface responsible for accessing messages
+ */
 public interface MessageDao {
 
 	/**

@@ -10,6 +10,7 @@ import veijalainen.eljas.otharjoitustyo.domain.User;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -27,7 +28,7 @@ public class MessageFileDaoTest {
 	@Test
 	public void constructorCalled() {
 		MessageFileDao messageFileDao = new MessageFileDao(file.getAbsolutePath());
-		assertTrue(messageFileDao.working);
+		assertTrue(messageFileDao.isWorking());
 	}
 
 	@Test
@@ -59,8 +60,33 @@ public class MessageFileDaoTest {
 		}
 	}
 
+	@Test
+	public void deleteMessageWorks() {
+		MessageFileDao messageFileDao = new MessageFileDao(file.getAbsolutePath());
+
+		Message message1 = new Message("A", "B", "hello", 0);
+		Message message2 = new Message("B", "A", "Hi!!!", 1);
+		Message message3 = new Message("A", "B", "How R U?", 2);
+
+
+		messageFileDao.sendMessage(message1);
+		messageFileDao.sendMessage(message2);
+		messageFileDao.sendMessage(message3);
+
+		messageFileDao.deleteMessage(message2);
+
+		List<Message> messageList = messageFileDao.getAllMessages();
+
+
+		assertTrue(messageList.contains(message1));
+		assertTrue(messageList.contains(message3));
+
+		assertFalse(messageList.contains(message2));
+
+	}
+
 	@After
-	public void tearDown() throws Exception{
+	public void tearDown() throws Exception {
 		file.delete();
 	}
 }
