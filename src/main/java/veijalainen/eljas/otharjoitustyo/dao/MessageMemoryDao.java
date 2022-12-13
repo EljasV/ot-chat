@@ -29,4 +29,14 @@ public class MessageMemoryDao implements MessageDao {
 	public boolean isWorking() {
 		return true;
 	}
+
+	@Override
+	public List<Message> getAllMessages() {
+		return messageList.stream().sorted((o1, o2) -> (int) (o1.timestamp - o2.timestamp)).collect(Collectors.toList());
+	}
+
+	@Override
+	public void deleteMessage(Message message) {
+		messageList.remove(message);
+	}
 }

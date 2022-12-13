@@ -10,5 +10,5 @@
 |  28.11.  | 2    | Yhteystietonäkymä toimivaksi ja ohjelman rakennekaavio                                      |
 |  5.12.   | 2    | Chattinäkymä ja chattaaminen toimimaan, viestit tallennetaan levylle                        |
 |  6.12.   | 2    | Testejä, dokumentaatiota ja 1. julkaisu                                                     |
-|  13.12   | 1    | Lisää Gson- kirjasto, ohjelmoi moderaattoreita ja konfiguraatiota                           |
-| YHTEENSÄ | 16   |                                                                                             |
+|  13.12   | 3    | Lisää Gson- kirjasto, ohjelmoi moderaattoreita ja konfiguraatiota                           |
+| YHTEENSÄ | 18   |                                                                                             |

@@ -9,7 +9,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import veijalainen.eljas.otharjoitustyo.dao.ConfigFileDao;
-import veijalainen.eljas.otharjoitustyo.dao.ConfigMemoryDao;
 import veijalainen.eljas.otharjoitustyo.dao.MessageFileDao;
 import veijalainen.eljas.otharjoitustyo.dao.UserFileDao;
 import veijalainen.eljas.otharjoitustyo.domain.*;
@@ -77,6 +76,86 @@ public class UiApp extends Application {
 
 	private Scene createModeratorScene(Stage stage) {
 		BorderPane borderPane = new BorderPane();
+
+		AnchorPane topAnchorPane = new AnchorPane();
+		topAnchorPane.setBorder(DEFAULT_BORDER);
+		topAnchorPane.setMinWidth(50);
+
+
+		AnchorPane innerTopPane = new AnchorPane();
+		AnchorPane.setTopAnchor(innerTopPane, 10.0);
+		AnchorPane.setBottomAnchor(innerTopPane, 10.0);
+		AnchorPane.setLeftAnchor(innerTopPane, 10.0);
+		AnchorPane.setRightAnchor(innerTopPane, 10.0);
+
+		Label topLabel = new Label("Moderating");
+		topLabel.setAlignment(Pos.CENTER_LEFT);
+		innerTopPane.getChildren().add(topLabel);
+
+		Button logoutButton = new Button("Logout");
+		innerTopPane.getChildren().add(logoutButton);
+
+		AnchorPane.setRightAnchor(logoutButton, 0.0);
+
+		logoutButton.setAlignment(Pos.CENTER_RIGHT);
+
+		logoutButton.setOnAction(actionEvent -> {
+			stage.setScene(loginScene);
+		});
+
+
+		topAnchorPane.getChildren().add(innerTopPane);
+
+
+		borderPane.setTop(topAnchorPane);
+
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setFitToWidth(true);
+
+		VBox vBox = new VBox();
+		scrollPane.setContent(vBox);
+
+		List<Message> messages = chatService.getAllMessages();
+		for (Message message :
+				  messages) {
+			AnchorPane anchorPane = new AnchorPane();
+			anchorPane.setPadding(new Insets(10));
+
+			HBox hBox = new HBox();
+			hBox.setMaxWidth(260);
+
+			Label fromLabel = new Label(message.fromName);
+			fromLabel.setBorder(DEFAULT_BORDER);
+
+			Label arrowLabel = new Label(" -> ");
+
+			Label toLabel = new Label(message.toName);
+			toLabel.setBorder(DEFAULT_BORDER);
+
+			Label separatorLabel = new Label(" : ");
+
+			Label messageDataLabel = new Label(message.data);
+			messageDataLabel.setWrapText(true);
+			messageDataLabel.setBorder(DEFAULT_BORDER);
+
+			Button deleteMessageButton = new Button("Delete");
+			AnchorPane.setRightAnchor(deleteMessageButton, 10.0);
+
+			deleteMessageButton.setOnAction(actionEvent -> {
+				chatService.deleteMessage(message);
+				moderatorScene = createModeratorScene(stage);
+				stage.setScene(moderatorScene);
+			});
+
+
+			hBox.getChildren().addAll(fromLabel, arrowLabel, toLabel, separatorLabel, messageDataLabel);
+			anchorPane.getChildren().addAll(hBox, deleteMessageButton);
+
+			vBox.getChildren().add(anchorPane);
+		}
+
+		borderPane.setCenter(scrollPane);
+
 		return new Scene(borderPane, 360, 640);
 	}
 
@@ -100,13 +179,14 @@ public class UiApp extends Application {
 
 		Button backButton = new Button("Back");
 		backButton.setAlignment(Pos.CENTER_LEFT);
-		innerTopPane.getChildren().add(backButton);
 
 		backButton.setOnAction(actionEvent -> {
 			chattingTo = null;
+			contactsScene = createContactsScene(stage);
 			stage.setScene(contactsScene);
 		});
 
+		innerTopPane.getChildren().add(backButton);
 
 		Label contactNameLabel = new Label(chattingTo.getUsername());
 		contactNameLabel.setAlignment(Pos.CENTER);
@@ -122,6 +202,7 @@ public class UiApp extends Application {
 
 		logoutButton.setOnAction(actionEvent -> {
 			session = null;
+			chattingTo = null;
 			stage.setScene(loginScene);
 		});
 
@@ -144,9 +225,12 @@ public class UiApp extends Application {
 			} else {
 				AnchorPane.setLeftAnchor(label, 10.0);
 			}
-			anchorPane.getChildren().add(label);
 
 			label.setBorder(DEFAULT_BORDER);
+			label.setWrapText(true);
+			label.setMaxWidth(300);
+
+			anchorPane.getChildren().add(label);
 
 			vBox.getChildren().add(anchorPane);
 		}

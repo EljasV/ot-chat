@@ -29,6 +29,10 @@ public class ChatService {
 		return userDao.getAll();
 	}
 
+	public void deleteMessage(Message message) {
+		messageDao.deleteMessage(message);
+	}
+
 	public enum CreateUserErrorCode { USERNAME_EXISTS, DIFFERENT_PASSWORDS, ILLEGAL_PASSWORD }
 
 	public Result<Void, CreateUserErrorCode> createUser(String username, String password, String password2) {
@@ -64,5 +68,9 @@ public class ChatService {
 
 	public void sendMessage(Message message) {
 		messageDao.sendMessage(message);
+	}
+
+	public List<Message> getAllMessages() {
+		return messageDao.getAllMessages();
 	}
 }

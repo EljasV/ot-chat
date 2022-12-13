@@ -1,6 +1,7 @@
 
 ## Viikko 6
 - Lisää moderaattorit
+- Moderaattorit voivat poistaa viestejä
 - Lisää konfiguraatiotiedosto
 - Käytä Gson- kirjastoa json- tiedostoihin
 
