@@ -8,12 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import veijalainen.eljas.otharjoitustyo.dao.ConfigFileDao;
+import veijalainen.eljas.otharjoitustyo.dao.ConfigMemoryDao;
 import veijalainen.eljas.otharjoitustyo.dao.MessageFileDao;
 import veijalainen.eljas.otharjoitustyo.dao.UserFileDao;
-import veijalainen.eljas.otharjoitustyo.domain.ChatService;
-import veijalainen.eljas.otharjoitustyo.domain.Message;
-import veijalainen.eljas.otharjoitustyo.domain.Session;
-import veijalainen.eljas.otharjoitustyo.domain.User;
+import veijalainen.eljas.otharjoitustyo.domain.*;
 import veijalainen.eljas.otharjoitustyo.util.Result;
 
 import java.time.Instant;
@@ -30,6 +29,7 @@ public class UiApp extends Application {
 	Scene createAccountScene;
 	Scene contactsScene;
 	Scene chatScene;
+	Scene moderatorScene;
 
 	ChatService chatService;
 	private Session session;
@@ -42,6 +42,7 @@ public class UiApp extends Application {
 
 		UserFileDao userDao = new UserFileDao("users.txt");
 		MessageFileDao messageFileDao = new MessageFileDao("messages.txt");
+		ConfigFileDao configFileDao = new ConfigFileDao("config.json");
 		if (!userDao.isWorking()) {
 			Alert alert = new Alert(Alert.AlertType.ERROR, "Couldn't use users.txt file!");
 			alert.show();
@@ -52,9 +53,13 @@ public class UiApp extends Application {
 			alert.show();
 			return;
 		}
+		if (!configFileDao.isWorking()) {
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Couldn't use config.json file!");
+			alert.show();
+			return;
+		}
 
-
-		chatService = new ChatService(userDao, messageFileDao);
+		chatService = new ChatService(userDao, messageFileDao, configFileDao);
 
 
 		welcomeScene = createWelcomeScene(stage);
@@ -64,8 +69,15 @@ public class UiApp extends Application {
 
 		chatScene = createChatScene(stage);
 
+		moderatorScene = createModeratorScene(stage);
+
 		stage.setScene(welcomeScene);
 		stage.show();
+	}
+
+	private Scene createModeratorScene(Stage stage) {
+		BorderPane borderPane = new BorderPane();
+		return new Scene(borderPane, 360, 640);
 	}
 
 	private Scene createChatScene(Stage stage) {
@@ -282,17 +294,21 @@ public class UiApp extends Application {
 		buttonPair.setAlignment(Pos.CENTER);
 		buttonPair.setSpacing(10);
 
-		Button backButton = new Button("Back");
-		backButton.setOnAction(actionEvent -> stage.setScene(welcomeScene));
-
-
-		Button continueButton = new Button("Continue");
-
 		Runnable resetInfo = () -> {
 			usernameField.setText("");
 			password1Field.setText("");
 			password2Field.setText("");
 		};
+
+		Button backButton = new Button("Back");
+		backButton.setOnAction(actionEvent -> {
+			resetInfo.run();
+			stage.setScene(welcomeScene);
+		});
+
+
+		Button continueButton = new Button("Continue");
+
 
 		continueButton.setOnAction(actionEvent -> {
 			Result<Void, ChatService.CreateUserErrorCode> result = chatService.createUser(usernameField.getText(), password1Field.getText(), password2Field.getText());
@@ -397,6 +413,13 @@ public class UiApp extends Application {
 				session = result.get();
 				contactsScene = createContactsScene(stage);
 				stage.setScene(contactsScene);
+			} else {
+				Result<Moderator, Void> moderatorResult = chatService.loginModerator(usernameField.getText(), passwordField.getText());
+				if (moderatorResult.success()) {
+					resetInfo.run();
+					moderatorScene = createModeratorScene(stage);
+					stage.setScene(moderatorScene);
+				}
 			}
 		});
 

@@ -1,4 +1,9 @@
 
+## Viikko 6
+- Lisää moderaattorit
+- Lisää konfiguraatiotiedosto
+- Käytä Gson- kirjastoa json- tiedostoihin
+
 ## Viikko 5
 - Tee chattinäkymä
 - Chatti toimimaan

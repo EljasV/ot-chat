@@ -1,5 +1,6 @@
 package veijalainen.eljas.otharjoitustyo.domain;
 
+import veijalainen.eljas.otharjoitustyo.dao.ConfigDao;
 import veijalainen.eljas.otharjoitustyo.dao.MessageDao;
 import veijalainen.eljas.otharjoitustyo.dao.UserDao;
 import veijalainen.eljas.otharjoitustyo.util.Result;
@@ -12,10 +13,16 @@ public class ChatService {
 	UserDao userDao;
 	MessageDao messageDao;
 
+	ConfigDao configDao;
 
-	public ChatService(UserDao userDao, MessageDao messageDao) {
+	public ChatService(UserDao userDao, MessageDao messageDao, ConfigDao configDao) {
 		this.userDao = userDao;
 		this.messageDao = messageDao;
+		this.configDao = configDao;
+	}
+
+	public Result<Moderator, Void> loginModerator(String name, String password) {
+		return configDao.login(name, password);
 	}
 
 	public List<User> getUsers() {
