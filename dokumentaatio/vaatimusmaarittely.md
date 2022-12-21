@@ -20,8 +20,3 @@ Moderaattori pystyy näkemään toisten käyttäjien viestit ja poistamaan epäa
 ![](./kuvat/kayttoliittymaluonnos.png)
 
 
-## Jatkokehitysideoita
-* Tiedostojen ja kuvien jakaminen käyttäjien kesken
-* Usean käyttäjän ryhmät
-* Käyttäjien itse tekemien hymiöiden käyttö
-* Jos on aikaa, viestit tallenetaan internetiin
