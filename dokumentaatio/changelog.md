@@ -1,4 +1,8 @@
 
+## Loppupalautus
+- Virhe käyttäjän luomisessa antaa ihmisen luettavaa tietoa
+- Lisätty käyttöohje
+
 ## Viikko 6
 - Lisää moderaattorit
 - Moderaattorit voivat poistaa viestejä

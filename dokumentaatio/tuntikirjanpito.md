@@ -11,4 +11,6 @@
 |  5.12.   | 2    | Chattinäkymä ja chattaaminen toimimaan, viestit tallennetaan levylle                                  |
 |  6.12.   | 2    | Testejä, dokumentaatiota ja 1. julkaisu                                                               |
 |  13.12   | 5    | Lisää Gson- kirjasto, ohjelmoi moderaattoreita ja konfiguraatiota. Lisäksi testejä ja dokumentaatiota |
+|  20.12   | 1    | Käyttöohjeen tekemistä                                                                                |
+|  21.12   | 1    | Käyttöohjeen tekemistä                                                                                |
 | YHTEENSÄ | 20   |                                                                                                       |

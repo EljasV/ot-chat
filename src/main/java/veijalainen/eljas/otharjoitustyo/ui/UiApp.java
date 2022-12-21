@@ -15,7 +15,9 @@ import veijalainen.eljas.otharjoitustyo.domain.*;
 import veijalainen.eljas.otharjoitustyo.util.Result;
 
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class UiApp extends Application {
@@ -401,7 +403,13 @@ public class UiApp extends Application {
 				resetInfo.run();
 				stage.setScene(welcomeScene);
 			} else {
-				infoLabel.setText(result.getError().name());
+				Map<ChatService.CreateUserErrorCode, String> errorCodeToString = new HashMap<>();
+				errorCodeToString.put(ChatService.CreateUserErrorCode.USERNAME_EXISTS, "An user with that username already exists.");
+				errorCodeToString.put(ChatService.CreateUserErrorCode.DIFFERENT_PASSWORDS, "Provided passwords are different.");
+				errorCodeToString.put(ChatService.CreateUserErrorCode.ILLEGAL_PASSWORD, "Password not acceptable.");
+
+				String name = errorCodeToString.getOrDefault(result.getError(), "Unkown error");
+				infoLabel.setText(name);
 			}
 		});
 
