@@ -41,13 +41,13 @@ Tiedosto ilmestyy kansioon [./target](./target)
 
 Tiedosto voidaan suorittaa komennolla:
 
-```java -jar ot-ot-chat-3.0.0.jar```
+```java -jar ot-chat-3.0.0.jar```
 
 Jos olet projektin juurikansiossa, suoritus tehdään komennolla
 
-(Windows)``java -jar target\ot-ot-chat-3.0.0.jar``
+(Windows)``java -jar target\ot-chat-3.0.0.jar``
 
-(Linux)``java -jar target/ot-ot-chat-3.0.0.jar``
+(Linux)``java -jar target/ot-chat-3.0.0.jar``
 
 
 Huomioi myös tiedostonimessä oleva versio 
