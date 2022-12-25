@@ -1,5 +1,5 @@
 
-# OT Harjoitustyö
+# OT-Chat
 Oletko halunnut aina chattailla samalla koneella olevien kanssa? Tässä on uusi mahdollisuutesi!
 Älä kuitenkaan hauku muita, sillä chattia voidaan moderoida.
 
@@ -64,3 +64,5 @@ Projektin javadoc voidaan generoida komennolla
 [Changelog](./dokumentaatio/changelog.md)
 
 [Arkkitehtuuri](./dokumentaatio/arkkitehtuuri.md)
+
+[Käyttöohje](./dokumentaatio/kayttoohje.md)

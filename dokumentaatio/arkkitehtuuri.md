@@ -108,4 +108,17 @@ Käyttöliittymässä on 6 näkymää:
 
 ![](kuvat/kayttoliittymaluonnos.png)
 
-Kuvan nuolet kertovat siirtymistä näkymien välillä 
+Kuvan nuolet kertovat siirtymistä näkymien välillä
+
+---
+
+## Tiedostot
+
+Sovellus luo 3 tiedostoa suoritushakemistoon
+
+* users.txt
+* messages.txt
+* config.json
+
+users.txt sisältää käyttäjänimet ja salasanat. messages.txt sisältää tiedot viesteistä, eli niiden lähettäjät,
+vastaanottajat, aikaleimat ja sisällöt. Config.json sisältää listan moderaattoreista. Käyttäjän ei tule muokata messages.txt:tä tai users.txt:tä. config.json tiedostoa saa muokata.
