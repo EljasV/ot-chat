@@ -4,7 +4,7 @@
 
 Ohjelman julkaisut löytyvät sivulta
 
-[https://github.com/EljasV/ot-harjoitustyo/releases](https://github.com/EljasV/ot-harjoitustyo/releases)
+[https://github.com/EljasV/ot-chat/releases](https://github.com/EljasV/ot-chat/releases)
 
 Lataa koneellesi viimeisimmän julkaisun .jar- tiedosto
 

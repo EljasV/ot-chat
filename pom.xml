@@ -5,13 +5,13 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>veijalainen.eljas.otharjoutustyo</groupId>
-    <artifactId>ot-harjoitustyo</artifactId>
-    <version>2.0.0</version>
+    <groupId>veijalainen.eljas.otchat</groupId>
+    <artifactId>ot-chat</artifactId>
+    <version>3.0.0</version>
     <packaging>jar</packaging>
 
     <name>OT harjoitustyö</name>
-    <url>https://github.com/EljasV/ot-harjoitustyo</url>
+    <url>https://github.com/EljasV/ot-chat</url>
 
     <dependencies>
         <dependency>
@@ -46,7 +46,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                 <version>0.8.3</version>
                 <configuration>
                     <excludes>
-                        <exclude>veijalainen/eljas/otharjoitustyo/ui/*</exclude>
+                        <exclude>veijalainen/eljas/otchat/ui/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -85,7 +85,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>veijalainen.eljas.otharjoitustyo.Main</mainClass>
+                                    <mainClass>veijalainen.eljas.otchat.Main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

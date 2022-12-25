@@ -55,6 +55,7 @@ ConfigDao on laajennettavissa, mutta tällä hetkellä se siltää vain tiedot m
 ---
 
 ## Käyttäjän viesti toiselle
+
 Sekvenssikaavio, joka näyttää mitä tapahtuu, kun käyttäjä laittaa viestin toiselle käyttäjälle
 
 ````mermaid
@@ -72,11 +73,14 @@ sequenceDiagram
     UI ->> UI: Uudelleenlataus
     UI ->> Käyttäjä: 
 ````
+
 ---
 
-
 ## Moderaattorin kirjautuminen sisään
-Moderaattorit kirjautuvat sisään samalla lailla kuin normaalit käyttäjät, mutta heidät ohjataan moderaattorinäkymään kirjautumisen jälkeen. 
+
+Moderaattorit kirjautuvat sisään samalla lailla kuin normaalit käyttäjät, mutta heidät ohjataan moderaattorinäkymään
+kirjautumisen jälkeen.
+
 ````mermaid
 sequenceDiagram
     Käyttäjä ->> UI: painaa 'continue'- painiketta
@@ -95,3 +99,13 @@ sequenceDiagram
     UI ->> UI: Moderaattorinäkymä
     UI ->> Käyttäjä: 
 ````
+
+---
+
+## Käyttöliittymä
+
+Käyttöliittymässä on 6 näkymää:
+
+![](kuvat/kayttoliittymaluonnos.png)
+
+Kuvan nuolet kertovat siirtymistä näkymien välillä 

@@ -11,7 +11,7 @@ Oletko halunnut aina chattailla samalla koneella olevien kanssa? Tässä on uusi
 ## Ohjelman suorittaminen
 Ohjelma voidaan kääntää ja suorittaa seuraavalla komennolla:
 
-```mvn compile exec:java -Dexec.mainClass=veijalainen.eljas.otharjoitustyo.Main```
+```mvn compile exec:java -Dexec.mainClass=veijalainen.eljas.otchat.Main```
 
 ## Ohjelman testaaminen
 Ohjelman testit voidaan suorittaa komennolla:
@@ -41,14 +41,16 @@ Tiedosto ilmestyy kansioon [./target](./target)
 
 Tiedosto voidaan suorittaa komennolla:
 
-```java -jar ot-harjoitustyo-1.0.0.jar```
+```java -jar ot-ot-chat-3.0.0.jar```
 
 Jos olet projektin juurikansiossa, suoritus tehdään komennolla
 
-(Windows)``java -jar target\ot-harjoitustyo-1.0.0.jar``
+(Windows)``java -jar target\ot-ot-chat-3.0.0.jar``
 
-(Linux)``java -jar target/ot-harjoitustyo-1.0.0.jar``
+(Linux)``java -jar target/ot-ot-chat-3.0.0.jar``
 
+
+Huomioi myös tiedostonimessä oleva versio 
 
 ## Javadoc
 Projektin javadoc voidaan generoida komennolla
