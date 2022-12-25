@@ -13,4 +13,5 @@
 |  13.12   | 5    | Lisää Gson- kirjasto, ohjelmoi moderaattoreita ja konfiguraatiota. Lisäksi testejä ja dokumentaatiota |
 |  20.12   | 1    | Käyttöohjeen tekemistä                                                                                |
 |  21.12   | 1    | Käyttöohjeen tekemistä                                                                                |
+|  25.12   | 1    | Loppuviimeistelyjä, eli dokumentointia ja ohjelmointia                                                |
 | YHTEENSÄ | 20   |                                                                                                       |

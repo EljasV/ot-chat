@@ -51,6 +51,7 @@ Käyttäjätilin luominen saattaa antaa seuraavanlaisia virheitä:
 * _An user with that username already exists._ Käyttäjänimi on jo käytössä: Valitse eri käyttäjänimi
 * _Provided passwords are different._ Annetut salasanat ovat erilaisia: Varmista, että salasanat ovat samoja
 * _Password not acceptable._ Salasana ei ole hyväksyttävä: Valitse turvallisempi salasana
+* _Username not acceptable._ Käyttäjänimi ei ole hyväksyttävä: Siinä ei saa olle merkkejä "_,_" tai "_:_"
 
 ## Sisäänkirjautuminen
 

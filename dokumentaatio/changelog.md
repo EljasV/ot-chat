@@ -2,6 +2,7 @@
 ## Loppupalautus
 - Virhe käyttäjän luomisessa antaa ihmisen luettavaa tietoa
 - Lisätty käyttöohje
+- Lisätty rajoituksia käyttäjänimeen
 
 ## Viikko 6
 - Lisää moderaattorit

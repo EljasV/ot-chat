@@ -1,27 +1,13 @@
-
 # Arkkitehtuuri
 
-Sekvenssikaavio, joka näyttää mitä tapahtuu, kun käyttäjä laittaa viestin toiselle käyttäjälle
-````mermaid
-sequenceDiagram
-    Käyttäjä ->> UI: painaa 'send'- painiketta
-    UI ->> ChatService: sendMessage(message)
-    ChatService ->> MessageDao: sendMessage(message)
-    MessageDao -->> MessageFileDao: 
-    MessageFileDao ->> MessageFileDao: save()
-    MessageFileDao ->> File: Data
-    File ->> MessageFileDao: 
-    MessageFileDao -->> MessageDao: 
-    MessageDao ->> ChatService: 
-    ChatService ->> UI: 
-    UI ->> UI: Uudelleenlataus
-    UI ->> Käyttäjä: 
-    
-````
-
+---
 
 ## Rakenne
-Koko sovelluksen rakenne näyttää tältä
+
+Koko sovelluksen rakenne näyttää tältä:
+
+Kuvassa näkyy luokat pakkausten sisällä.
+
 ````mermaid
 flowchart
     subgraph ui
@@ -41,14 +27,71 @@ flowchart
     end
     UiApp --> ChatService
     UiApp --> Session
-    UiApp --> User
-    ChatService -.-> dao
+    UiApp -.-> User
+    Session --> User
+    ChatService --> dao
     User -.- UserDao
     ChatService -.- User
+    ChatService -->Message
     UiApp -.-> Message
     Message -.- MessageDao
-    ChatService -->Message
     ChatService -.- Moderator
     UiApp -.- Moderator
     Moderator -.- ConfigDao
+````
+
+Käyttöliittymän koodi on UiApp:in sisällä.
+UiApp omistaa ChatServicen ja Sessionin.
+Session kuvaa tietoa nykyisestä istunnosta, kuten minä käyttäjänä ollaan kirjauduttu sisään
+
+UiApp tarvitsee tietoa myös muista käyttäjistä ja viesteistä.
+
+Kun UiApp pyytää ChatServiceä tekemään jotain, useassa tapauksessa pyynnöt menevtä suoraan niistä vastaaville DAO:ille.
+
+ChatService pitää sisällään käytössä olevat DAO:t, jotka injektoidaan sisään samalla kun ChatServiceä luodaan.
+
+ConfigDao on laajennettavissa, mutta tällä hetkellä se siltää vain tiedot moderaattoreista.
+
+---
+
+## Käyttäjän viesti toiselle
+Sekvenssikaavio, joka näyttää mitä tapahtuu, kun käyttäjä laittaa viestin toiselle käyttäjälle
+
+````mermaid
+sequenceDiagram
+    Käyttäjä ->> UI: painaa 'send'- painiketta
+    UI ->> ChatService: sendMessage(message)
+    ChatService ->> MessageDao: sendMessage(message)
+    MessageDao -->> MessageFileDao: 
+    MessageFileDao ->> MessageFileDao: save()
+    MessageFileDao ->> File: Data
+    File ->> MessageFileDao: 
+    MessageFileDao -->> MessageDao: 
+    MessageDao ->> ChatService: 
+    ChatService ->> UI: 
+    UI ->> UI: Uudelleenlataus
+    UI ->> Käyttäjä: 
+````
+---
+
+
+## Moderaattorin kirjautuminen sisään
+Moderaattorit kirjautuvat sisään samalla lailla kuin normaalit käyttäjät, mutta heidät ohjataan moderaattorinäkymään kirjautumisen jälkeen. 
+````mermaid
+sequenceDiagram
+    Käyttäjä ->> UI: painaa 'continue'- painiketta
+    UI ->> ChatService: login(username, password)
+    ChatService ->> UserDao: login(username, password)
+    UserDao -->> UserFileDao: 
+    UserFileDao -->> UserDao: 
+    UserDao ->> ChatService: Käyttäjää ei löydy
+    ChatService ->> UI: Käyttäjää ei löydy
+    UI ->> ChatService: loginModerator(username, password)
+    ChatService ->> ConfigDao: login(username, password)
+    ConfigDao -->> ConfigFileDao: 
+    ConfigFileDao -->> ConfigDao: 
+    ConfigDao ->> ChatService: Moderaattori löytyi
+    ChatService ->> UI: 
+    UI ->> UI: Moderaattorinäkymä
+    UI ->> Käyttäjä: 
 ````

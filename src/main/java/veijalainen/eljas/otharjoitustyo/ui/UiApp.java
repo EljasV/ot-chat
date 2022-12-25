@@ -407,6 +407,7 @@ public class UiApp extends Application {
 				errorCodeToString.put(ChatService.CreateUserErrorCode.USERNAME_EXISTS, "An user with that username already exists.");
 				errorCodeToString.put(ChatService.CreateUserErrorCode.DIFFERENT_PASSWORDS, "Provided passwords are different.");
 				errorCodeToString.put(ChatService.CreateUserErrorCode.ILLEGAL_PASSWORD, "Password not acceptable.");
+				errorCodeToString.put(ChatService.CreateUserErrorCode.ILLEGAL_USERNAME, "Username not acceptable. Please do not use symbols ',' or ':'.");
 
 				String name = errorCodeToString.getOrDefault(result.getError(), "Unkown error");
 				infoLabel.setText(name);

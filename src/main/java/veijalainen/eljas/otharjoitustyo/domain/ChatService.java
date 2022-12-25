@@ -33,7 +33,7 @@ public class ChatService {
 		messageDao.deleteMessage(message);
 	}
 
-	public enum CreateUserErrorCode { USERNAME_EXISTS, DIFFERENT_PASSWORDS, ILLEGAL_PASSWORD }
+	public enum CreateUserErrorCode { USERNAME_EXISTS, DIFFERENT_PASSWORDS, ILLEGAL_USERNAME, ILLEGAL_PASSWORD }
 
 	public Result<Void, CreateUserErrorCode> createUser(String username, String password, String password2) {
 		if (userDao.findByUsername(username).success()) {
@@ -44,6 +44,10 @@ public class ChatService {
 		}
 		if (password.length() < 5) {
 			return Result.unsuccessful(CreateUserErrorCode.ILLEGAL_PASSWORD);
+		}
+
+		if (username.contains(",") || username.contains(":")) {
+			return Result.unsuccessful(CreateUserErrorCode.ILLEGAL_USERNAME);
 		}
 		userDao.create(new User(username, password));
 		return Result.successful(null);
